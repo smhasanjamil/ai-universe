@@ -33,11 +33,6 @@ const displayData = (datas) => {
                     </div>
                     <div class="col-3">
                         <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn d-grid mx-auto align-middle" onclick="loadSingleCardDetails('${id}')"><span style="background-color: #FEF7F7; color:red; padding: 10px; border-radius: 75px;" class="mx-auto align-middle"><i class="fa-solid fa-arrow-right"></i></span></button>
-
-
-                        
-
-
                     </div>
                 </div>
             </div>
@@ -57,6 +52,62 @@ const loadSingleCardDetails = (id) => {
 }
 
 const displaySingleData = (values) => {
-    console.log(values);
-    const { id, tool_name, description, logo } = values;
+    console.log(values.integrations[0]);
+    const { id, tool_name, description, logo, image_link, input_output_examples, pricing, features, integrations } = values;
+
+    const modalContainer = document.getElementById('modal-body');
+
+    modalContainer.innerHTML = `
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="card border-danger bg-danger bg-opacity-10" style="background-color: rgba(235, 87, 87, 0.05) !important;">
+                    <div class="card-body">
+                        <h2 class="card-title fw-bold">${description}</h2>
+                        <div class="row my-3">
+                            <div class="col-12 col-md-4 text-center">
+                                <p class="text-success">${pricing[0].price}<br>${pricing[0].plan}</p>
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <p class="text-warning">${pricing[1].price}<br>${pricing[0].plan}</p>
+                            </div>
+                            <div class="col-12 col-md-4 text-center">
+                                <p class="text-danger">${pricing[2].price}<br>${pricing[0].plan}</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 mb-md-0">
+                            <div class="col-12 col-md-6">
+                                <h4 class="card-title fw-bold">Features</h4>
+                                <ul class="text-secondary">
+                                    <li>${features[1].feature_name}</li>
+                                    <li>${features[2].feature_name}</li>
+                                    <li>${features[3].feature_name}</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 class="card-title fw-bold">Integrations</h4>
+                                <ul class="text-secondary">
+                                    <li>${integrations[0]}</li>
+                                    <li>${integrations[1]}</li>
+                                    <li>${integrations[2]}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="${image_link[0]}" class="card-img-top p-3 rounded" alt="..." style="border-radius:25px !important">
+                    <div class="card-body">
+                        <h4 class="card-title text-center fw-bold">${input_output_examples[0].input}</h4>
+                        <p class="card-text text-center">${input_output_examples[0].output}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    `;
+
 }
