@@ -1,8 +1,14 @@
 //Fetch All Data from api
 const loadData = () => {
+    //Spinner
+    document.getElementById('load-spinner').classList.remove("d-none");
+
     fetch('https://openapi.programming-hero.com/api/ai/tools')
         .then(res => res.json())
-        .then(data => displayData(data.data.tools.slice(0, 6)))
+        .then(data => {
+            document.getElementById('load-spinner').classList.add("d-none");
+            displayData(data.data.tools.slice(0, 6))
+        })
 }
 
 loadData();
