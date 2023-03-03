@@ -2,18 +2,20 @@
 const loadData = () => {
     fetch('https://openapi.programming-hero.com/api/ai/tools')
         .then(res => res.json())
-        .then(data => displayData(data.data.tools))
+        .then(data => displayData(data.data.tools.slice(0, 6)))
 }
 
 loadData();
 
 //Display Data from Api
 const displayData = (datas) => {
+    const container = document.getElementById('all-data');
+    container.innerHTML = '';
     datas.forEach((value) => {
         // console.log(value);
         const { id, name, description, image, published_in, features } = value;
 
-        const container = document.getElementById('all-data');
+
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -44,6 +46,15 @@ const displayData = (datas) => {
     })
 }
 
+//Show All Data Together
+const showAllDataTogether = () => {
+    fetch('https://openapi.programming-hero.com/api/ai/tools')
+        .then(res => res.json())
+        .then(data => displayData(data.data.tools))
+}
+
+
+
 const loadSingleCardDetails = (id) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(URL)
@@ -53,6 +64,7 @@ const loadSingleCardDetails = (id) => {
 
 const displaySingleData = (values) => {
     console.log(values.accuracy.score);
+    // values.sclice(1,6);
     const { id, tool_name, description, logo, image_link, input_output_examples, pricing, features, integrations, accuracy } = values;
 
     const modalContainer = document.getElementById('modal-body');
