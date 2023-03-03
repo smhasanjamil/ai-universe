@@ -10,7 +10,7 @@ loadData();
 //Display Data from Api
 const displayData = (datas) => {
     datas.forEach((value) => {
-        console.log(value);
+        // console.log(value);
         const { id, name, description, image, published_in, features } = value;
 
         const container = document.getElementById('all-data');
@@ -45,5 +45,8 @@ const displayData = (datas) => {
 }
 
 const loadSingleCardDetails = (id) => {
-    console.log(id);
+    const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch(URL)
+    .then(res => res.json())
+    .then(data => console.log(data))
 }
