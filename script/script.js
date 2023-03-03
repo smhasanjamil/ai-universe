@@ -18,7 +18,7 @@ const displayData = (datas) => {
         div.classList.add('col');
         div.innerHTML = `
         <div class="card h-100">
-            <img src="${image}" class="card-img-top p-3" alt="...">
+            <img src="${image}" class="card-img-top p-3" alt="..." style="border-radius:25px !important">
             <div class="card-body">
                 <h5 class="card-title fw-bold">Features</h5>
                 <p class="card-text">1. ${features[0]}</p>
@@ -52,8 +52,8 @@ const loadSingleCardDetails = (id) => {
 }
 
 const displaySingleData = (values) => {
-    console.log(values.integrations[0]);
-    const { id, tool_name, description, logo, image_link, input_output_examples, pricing, features, integrations } = values;
+    console.log(values.accuracy.score);
+    const { id, tool_name, description, logo, image_link, input_output_examples, pricing, features, integrations, accuracy } = values;
 
     const modalContainer = document.getElementById('modal-body');
 
@@ -99,6 +99,9 @@ const displaySingleData = (values) => {
             </div>
             <div class="col-md-6">
                 <div class="card">
+
+                <p class="text-light bg-danger position-absolute top-0 end-0 me-4 mt-4 p-1 fs-6 rounded">${accuracy.score}% accuracy</p>
+
                     <img src="${image_link[0]}" class="card-img-top p-3 rounded" alt="..." style="border-radius:25px !important">
                     <div class="card-body">
                         <h4 class="card-title text-center fw-bold">${input_output_examples[0].input}</h4>
@@ -107,7 +110,6 @@ const displaySingleData = (values) => {
                 </div>
             </div>
         </div>
-    
     `;
 
 }
