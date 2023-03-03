@@ -27,12 +27,12 @@ const displayData = (datas) => {
             </div>
             <div class="card-footer">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-9">
                         <h5 class="card-title fw-bold">${name}</h5>
-                        <small class="text-muted">${published_in}</small>
+                        <small class="text-muted"> <span><i class="fa-solid fa-calendar-days"></i></span> ${published_in} </small>
                     </div>
-                    <div class="col-4">
-                        <button class="btn btn-danger d-grid mx-auto">See More</button>
+                    <div class="col-3">
+                        <button class="btn d-grid mx-auto align-middle"><span style="background-color: #FEF7F7; color:red; padding: 10px; border-radius: 75px;" class="mx-auto align-middle"><i class="fa-solid fa-arrow-right"></i></span></button>
                     </div>
                 </div>
             </div>
