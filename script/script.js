@@ -18,13 +18,16 @@ const displayData = (datas) => {
         div.classList.add('col');
         div.innerHTML = `
         <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="${image}" class="card-img-top p-3" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 class="card-title fw-bold">Features</h5>
+                <p class="card-text">1. ${features[0]}</p>
+                <p class="card-text">2. ${features[1]}</p>
+                <p class="card-text">3. ${features[2]}</p>
             </div>
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+            <h5 class="card-title fw-bold">${name}</h5>
+                <small class="text-muted">${published_in}</small>
             </div>
         </div>
         `;
