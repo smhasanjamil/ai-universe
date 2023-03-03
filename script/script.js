@@ -26,8 +26,15 @@ const displayData = (datas) => {
                 <p class="card-text">3. ${features[2]}</p>
             </div>
             <div class="card-footer">
-            <h5 class="card-title fw-bold">${name}</h5>
-                <small class="text-muted">${published_in}</small>
+                <div class="row">
+                    <div class="col-8">
+                        <h5 class="card-title fw-bold">${name}</h5>
+                        <small class="text-muted">${published_in}</small>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-danger d-grid mx-auto">See More</button>
+                    </div>
+                </div>
             </div>
         </div>
         `;
