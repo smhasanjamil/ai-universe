@@ -118,7 +118,10 @@ const displaySingleData = (values) => {
             <div class="col-md-6">
                 <div class="card">
 
-                <p class="text-light bg-danger position-absolute top-0 end-0 me-4 mt-4 p-1 fs-6 rounded">${accuracy.score}% accuracy</p>
+                
+
+                <p class="text-light bg-danger position-absolute top-0 end-0 me-4 mt-4 p-1 fs-6 rounded">${accuracy.score ? accuracy.score + '% accuracy' : ''}</p>
+
 
                     <img src="${image_link[0]}" class="card-img-top p-3 rounded" alt="..." style="border-radius:25px !important">
                     <div class="card-body">
