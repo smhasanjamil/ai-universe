@@ -66,6 +66,7 @@ const showAllDataTogether = () => {
         .then(res => res.json())
         .then(data => displayData(data.data.tools));
     document.getElementById('seeMore').classList.add("d-none");
+    document.getElementById('all-data').classList.add("mb-5");
 }
 
 
@@ -78,7 +79,7 @@ const loadSingleCardDetails = (id) => {
 }
 
 const displaySingleData = (values) => {
-    console.log(values.accuracy.score);
+    console.log(values);
     // values.sclice(1,6);
     const { id, tool_name, description, logo, image_link, input_output_examples, pricing, features, integrations, accuracy } = values;
 
@@ -89,16 +90,16 @@ const displaySingleData = (values) => {
             <div class="col-md-6 mb-3 mb-md-0">
                 <div class="card border-danger bg-danger bg-opacity-10" style="background-color: rgba(235, 87, 87, 0.05) !important;">
                     <div class="card-body">
-                        <h2 class="card-title fw-bold">${description}</h2>
+                        <h2 class="card-title fw-bold">${description ? description : 'No description found'}</h2>
                         <div class="row my-3">
                             <div class="col-12 col-md-4 text-center">
-                                <p class="text-success">${pricing[0].price}<br>${pricing[0].plan}</p>
+                                <p class="text-success">${(pricing[0].price ? pricing[0].price : 'Free Of Cost')}<br>${pricing[0].plan ? pricing[0].plan : 'Not Found'}</p>
                             </div>
                             <div class="col-12 col-md-4 text-center">
-                                <p class="text-warning">${pricing[1].price}<br>${pricing[0].plan}</p>
+                                <p class="text-warning">${(pricing[1].price ? pricing[1].price : 'Free Of Cost')}<br>${pricing[1].plan ? pricing[1].plan : 'Not Found'}</p>
                             </div>
                             <div class="col-12 col-md-4 text-center">
-                                <p class="text-danger">${pricing[2].price}<br>${pricing[0].plan}</p>
+                                <p class="text-danger">${(pricing[2].price ? pricing[2].price : 'Free Of Cost')}<br>${pricing[2].plan ? pricing[2].plan : 'Not Found'}</p>
                             </div>
                         </div>
 
@@ -106,17 +107,17 @@ const displaySingleData = (values) => {
                             <div class="col-12 col-md-6">
                                 <h4 class="card-title fw-bold">Features</h4>
                                 <ul class="text-secondary">
-                                    <li>${features[1].feature_name}</li>
-                                    <li>${features[2].feature_name}</li>
-                                    <li>${features[3].feature_name}</li>
+                                    <li>${features[1].feature_name ? features[1].feature_name : 'No data Found'}</li>
+                                    <li>${features[2].feature_name ? features[2].feature_name : 'No data Found'}</li>
+                                    <li>${features[3].feature_name ? features[3].feature_name : 'No data Found'}</li>
                                 </ul>
                             </div>
                             <div class="col-12 col-md-6">
                                 <h4 class="card-title fw-bold">Integrations</h4>
                                 <ul class="text-secondary">
-                                    <li>${integrations[0]}</li>
-                                    <li>${integrations[1]}</li>
-                                    <li>${integrations[2]}</li>
+                                    <li>${integrations[0] ? integrations[0] : 'No data Found'}</li>
+                                    <li>${integrations[1] ? integrations[1] : 'No data Found'}</li>
+                                    <li>${integrations[2] ? integrations[2] : 'No data Found'}</li>
                                 </ul>
                             </div>
                         </div>
@@ -132,10 +133,10 @@ const displaySingleData = (values) => {
                 <p class="text-light bg-danger position-absolute top-0 end-0 me-4 mt-4 p-1 fs-6 rounded">${accuracy.score ? accuracy.score + '% accuracy' : ''}</p>
 
 
-                    <img src="${image_link[0]}" class="card-img-top p-3 rounded" alt="..." style="border-radius:25px !important">
+                    <img src="${image_link[0] ? image_link[0] : 'No Image Found'}" class="card-img-top p-3 rounded" alt="..." style="border-radius:25px !important">
                     <div class="card-body">
-                        <h4 class="card-title text-center fw-bold">${input_output_examples[0].input}</h4>
-                        <p class="card-text text-center">${input_output_examples[0].output}</p>
+                        <h4 class="card-title text-center fw-bold">${input_output_examples[0].input ? input_output_examples[0].input : 'Can you give any example?'}</h4>
+                        <p class="card-text text-center">${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
                     </div>
                 </div>
             </div>
@@ -143,8 +144,6 @@ const displaySingleData = (values) => {
     `;
 
 }
-
-
 
 
 //Sort data by date
@@ -157,6 +156,7 @@ const sortData = () => {
         .then(data => {
             document.getElementById('load-spinner').classList.add("d-none");
             document.getElementById('seeMore').classList.add("d-none");
+            document.getElementById('all-data').classList.add("mb-5");
             const sortedData = data.data.tools.sort((a, b) => new Date(b.published_in) - new Date(a.published_in));
             displayData(sortedData)
         })
