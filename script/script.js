@@ -21,6 +21,12 @@ const displayData = (datas) => {
         // console.log(value);
         const { id, name, description, image, published_in, features } = value;
 
+        //Date convert from string
+        const dateString = published_in;
+        const date = new Date(dateString);
+        const publishedDate = date.toLocaleDateString();
+
+
 
         const div = document.createElement('div');
         div.classList.add('col');
@@ -37,7 +43,7 @@ const displayData = (datas) => {
                 <div class="row">
                     <div class="col-9">
                         <h5 class="card-title fw-bold">${name}</h5>
-                        <small class="text-muted"> <span><i class="fa-solid fa-calendar-days"></i></span> ${published_in} </small>
+                        <small class="text-muted"> <span><i class="fa-solid fa-calendar-days"></i></span> ${publishedDate} </small>
                     </div>
                     <div class="col-3">
                         <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn d-grid mx-auto align-middle" onclick="loadSingleCardDetails('${id}')"><span style="background-color: #FEF7F7; color:red; padding: 10px; border-radius: 75px;" class="mx-auto align-middle"><i class="fa-solid fa-arrow-right"></i></span></button>
@@ -50,13 +56,16 @@ const displayData = (datas) => {
         container.appendChild(div);
 
     })
+
 }
+
 
 //Show All Data Together
 const showAllDataTogether = () => {
     fetch('https://openapi.programming-hero.com/api/ai/tools')
         .then(res => res.json())
-        .then(data => displayData(data.data.tools))
+        .then(data => displayData(data.data.tools));
+    document.getElementById('seeMore').classList.add("d-none");
 }
 
 
@@ -133,4 +142,22 @@ const displaySingleData = (values) => {
         </div>
     `;
 
+}
+
+
+
+
+//Sort data by date
+const sortData = () => {
+    //Spinner
+    document.getElementById('load-spinner').classList.remove("d-none");
+
+    fetch('https://openapi.programming-hero.com/api/ai/tools')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('load-spinner').classList.add("d-none");
+            document.getElementById('seeMore').classList.add("d-none");
+            const sortedData = data.data.tools.sort((a, b) => new Date(b.published_in) - new Date(a.published_in));
+            displayData(sortedData)
+        })
 }
